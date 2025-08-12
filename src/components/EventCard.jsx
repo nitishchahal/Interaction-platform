@@ -1,9 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-// Correct import statement with the new icon name MapPinIcon
 import { CalendarIcon, MapPinIcon } from '@heroicons/react/24/outline';
+import { Link } from 'react-router-dom';
 
-export default function EventCard({ event, onOpen }) {
+export default function EventCard({ event }) {
   return (
     <motion.div
       className="bg-white rounded-xl shadow-lg p-6 flex flex-col h-full hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
@@ -22,7 +22,6 @@ export default function EventCard({ event, onOpen }) {
 
       <div className="flex-grow">
         <h3 className="font-bold text-xl text-gray-800 mb-2">{event.title}</h3>
-        
         <div className="flex items-center text-gray-600 text-sm mb-1">
           <CalendarIcon className="h-4 w-4 mr-2 text-blue-500" />
           <span>{event.date}</span>
@@ -34,13 +33,12 @@ export default function EventCard({ event, onOpen }) {
       </div>
 
       <div className="mt-auto flex justify-end">
-        <motion.button
-          onClick={() => onOpen(event)}
+        <Link
+          to={`/events/${event.id}`}
           className="bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-200"
-          whileTap={{ scale: 0.95 }}
         >
           View Details
-        </motion.button>
+        </Link>
       </div>
     </motion.div>
   );

@@ -62,6 +62,7 @@ export default function Home() {
           <motion.div variants={containerVariants} className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {events.slice(0, 3).map(event => (
               <motion.div key={event.id} variants={itemVariants}>
+                {/* Pass event to EventCard, which now has a built-in Link */}
                 <EventCard event={event} />
               </motion.div>
             ))}
@@ -69,45 +70,42 @@ export default function Home() {
         </div>
       </section>
 
-     <section className="py-16">
-  <div className="container mx-auto px-4">
-    <div className="flex justify-between items-center mb-12">
-      <h2 className="text-4xl font-extrabold text-white tracking-wide font-['Poppins']">Featured Alumni</h2>
-      <Link to="/directory" className="text-blue-400 font-semibold hover:text-blue-300 transition-colors flex items-center gap-2 relative group">
-        <span className="relative z-10">View Directory</span>
-        <FaArrowRight className="transition-transform group-hover:translate-x-1" />
-        <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-      </Link>
-    </div>
-    <motion.div variants={containerVariants} className="grid grid-cols-1 md:grid-cols-2 gap-8">
-      {alumni.slice(0, 2).map(person => (
-        <motion.div
-          key={person.id}
-          variants={itemVariants}
-          className="bg-gray-800 rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row border border-gray-700 hover:border-blue-500 transition-colors duration-300 transform hover:-translate-y-1"
-        >
-          <div className="w-full md:w-1/3 relative h-64">
-            {/* Using 'person.profileImage' instead of 'person.photo' */}
-            <img
-              src={person.profileImage}
-              alt={person.name}
-              className="w-full h-full object-cover rounded-3xl md:rounded-r-none"
-            />
-            <div className="absolute inset-0 bg-blue-500 opacity-20 hover:opacity-0 transition-opacity duration-300"></div>
+      {/* Featured Alumni Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-between items-center mb-12">
+            <h2 className="text-4xl font-extrabold text-white tracking-wide font-['Poppins']">Featured Alumni</h2>
+            <Link to="/directory" className="text-blue-400 font-semibold hover:text-blue-300 transition-colors flex items-center gap-2 relative group">
+              <span className="relative z-10">View Directory</span>
+              <FaArrowRight className="transition-transform group-hover:translate-x-1" />
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+            </Link>
           </div>
-          <div className="p-6 flex-1 flex flex-col justify-center">
-            <h3 className="text-2xl font-bold text-white mb-1 font-['Poppins']">{person.name}</h3>
-            {/* Using 'person.profession', 'person.company', and 'person.batch' */}
-            <p className="text-md text-blue-400 mb-2 font-['Roboto']">{person.profession} at {person.company} | Batch of {person.batch}</p>
-            {/* Using 'person.bio' instead of 'person.story' */}
-            <p className="text-gray-300 mt-4 text-sm leading-relaxed font-['Open Sans']">{person.bio}</p>
-          </div>
-        </motion.div>
-      ))}
-    </motion.div>
-  </div>
-</section>
-      
+          <motion.div variants={containerVariants} className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {alumni.slice(0, 2).map(person => (
+              <motion.div
+                key={person.id}
+                variants={itemVariants}
+                className="bg-gray-800 rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row border border-gray-700 hover:border-blue-500 transition-colors duration-300 transform hover:-translate-y-1"
+              >
+                <div className="w-full md:w-1/3 relative h-64">
+                  <img
+                    src={person.profileImage}
+                    alt={person.name}
+                    className="w-full h-full object-cover rounded-3xl md:rounded-r-none"
+                  />
+                  <div className="absolute inset-0 bg-blue-500 opacity-20 hover:opacity-0 transition-opacity duration-300"></div>
+                </div>
+                <div className="p-6 flex-1 flex flex-col justify-center">
+                  <h3 className="text-2xl font-bold text-white mb-1 font-['Poppins']">{person.name}</h3>
+                  <p className="text-md text-blue-400 mb-2 font-['Roboto']">{person.profession} at {person.company} | Batch of {person.batch}</p>
+                  <p className="text-gray-300 mt-4 text-sm leading-relaxed font-['Open Sans']">{person.bio}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
     </motion.div>
   );
 }

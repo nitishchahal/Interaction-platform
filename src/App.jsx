@@ -4,19 +4,18 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import EventsPage from "./pages/EventsPage";
+import EventDetails from "./pages/EventDetails"; // ✅ New page for single event
 import DirectoryPage from "./pages/DirectoryPage";
 import JobsPage from "./pages/JobsPage";
 import DonatePage from "./pages/DonatePage";
 import AuthPage from "./pages/AuthPage";
-import ProfilePage from "./pages/ProfilePage"; // ✅ New profile page
-import ScrollToTop from "./ScrollTotop"; // Smooth scroll
+import ProfilePage from "./pages/ProfilePage"; 
+import ScrollToTop from "./ScrollTotop"; 
 
-// Example auth state simulation (Replace with actual auth logic)
 const isAuthenticated = () => {
-  return localStorage.getItem("user") !== null; // or check auth context
+  return localStorage.getItem("user") !== null;
 };
 
-// Protected Route Wrapper
 function PrivateRoute({ children }) {
   return isAuthenticated() ? children : <Navigate to="/auth" replace />;
 }
@@ -33,22 +32,24 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/events" element={<EventsPage />} />
+
+            {/* ✅ Dynamic route for single event */}
+            <Route path="/events/:id" element={<EventDetails />} />
+
             <Route path="/directory" element={<DirectoryPage />} />
             <Route path="/jobs" element={<JobsPage />} />
             <Route path="/donate" element={<DonatePage />} />
             <Route path="/auth" element={<AuthPage />} />
 
-            {/* ✅ Protected Profile Route */}
             <Route
               path="/profile"
               element={
-                
+                <PrivateRoute>
                   <ProfilePage />
-                
+                </PrivateRoute>
               }
             />
 
-            {/* 404 Page */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
