@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* basic small tweaks */
+body { @apply bg-light; }
+:root {
+  --brand-primary: #1E3A8A;
+}
+
+/* simple utility example */
+.btn-primary {
+  @apply bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition;
+}
