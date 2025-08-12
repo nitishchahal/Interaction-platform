@@ -32,9 +32,13 @@ export default function Navbar() {
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         
         {/* Logo */}
-        <Link to="/">
-          <img src={logoImage} alt="Logo" className="w-36 sm:w-40" />
-        </Link>
+       <Link to="/" className="flex items-center space-x-3">
+  <img src={logoImage} alt="Logo" className="w-36 sm:w-40" />
+  <div className="text-2xl font-bold text-gray-800 hover:text-blue-600 transition-colors duration-300">
+    EduConnect
+  </div>
+</Link>
+
         
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-6 text-gray-700 font-medium">

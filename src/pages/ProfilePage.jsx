@@ -11,6 +11,8 @@ import {
 import { Bar } from "react-chartjs-2";
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
+import { useNavigate } from "react-router-dom";
+
 
 // Register Chart.js components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
@@ -38,6 +40,13 @@ const App = () => {
   const [modalMessage, setModalMessage] = useState("");
   const [modalTitle, setModalTitle] = useState("");
   const [profilePicUrl, setProfilePicUrl] = useState("https://placehold.co/150x150/e2e8f0/cbd5e0?text=Profile");
+  const navigate = useNavigate();
+  // Effect to set the initial profile picture URL if it exists
+  useEffect(() => {
+    if (profile.profilePic) {
+      setProfilePicUrl(URL.createObjectURL(profile.profilePic));  
+    }
+  }, [profile.profilePic]);
 
   // Log profile data whenever it changes for development purposes
   useEffect(() => {

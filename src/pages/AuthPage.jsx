@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaUser, FaEnvelope, FaMobileAlt, FaLock, FaKey } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify"; // ✅ Toast library
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function AuthPage() {
@@ -30,7 +30,7 @@ export default function AuthPage() {
 
 function AuthModalContent({ onClose }) {
   const navigate = useNavigate();
-  const [view, setView] = useState("login"); 
+  const [view, setView] = useState("login");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
@@ -69,15 +69,20 @@ function AuthModalContent({ onClose }) {
       return;
     }
 
-    const userData = { name, email, mobile };
-    localStorage.setItem("alumniUser", JSON.stringify(userData));
-    console.log("User Data Saved:", userData);
+    // Save user data in localStorage (Navbar uses this to show profile pic)
+    const userData = {
+      name: name || "Guest User",
+      email,
+      mobile,
+      profilePic: "https://placehold.co/40x40?text=U" // default placeholder
+    };
+    localStorage.setItem("user", JSON.stringify(userData));
 
     toast.success("✅ You are verified!");
 
     setTimeout(() => {
       navigate("/profile");
-    }, 1500);
+    }, 1000);
   };
 
   const modalVariants = {
